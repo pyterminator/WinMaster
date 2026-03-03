@@ -7,15 +7,15 @@
 
 
 {% block styles %}
-{% if colors %}
-    <style>
-        {% for c in colors %}
-            :root{
-                {{c.color_name}}: {{c.color_hex}};
-            }
-        {% endfor %}
-    </style>
-{% endif %}
+    {% if colors %}
+        <style>
+            {% for c in colors %}
+                :root{
+                    {{c.color_name}}: {{c.color_hex}};
+                }
+            {% endfor %}
+        </style>
+    {% endif %}
 {% endblock %}
 
 
@@ -199,7 +199,7 @@
                 general_q.innerHTML += `
                     <div id='settings'>
                         <button id='reset' onclick='reset(this)'>Yenidən başlat</button>
-                        <button id='confirm'>Təsdiqlə</button>
+                        <button id='confirm' onclick='confirmForm(this)'>Təsdiqlə</button>
                     </div>
                 `
             }
@@ -210,6 +210,9 @@
             localStorage.removeItem("my_ans")
             localStorage.removeItem("finished_my_ans")
             window.location.reload()
+        }
+        function confirmForm(btn){
+            window.location.href = "/register"
         }
 
         function svgClick(sv){

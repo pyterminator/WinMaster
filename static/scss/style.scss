@@ -4,6 +4,7 @@
 :root {
     --bg-color: #fff;
     --text-color: #000;
+    --text-color-hover: rgba(0, 0, 0, 0.2);
     --link: #24a7db;
 }
 
@@ -698,6 +699,88 @@ html {
                     }
                 }
 
+            }
+
+            .register {
+                .container {
+                    padding: 1.6rem;
+                    background-color: var(--bg-color);
+
+                    hr {
+                        border: .1rem solid var(--link);
+                        margin-bottom: 2.5rem;
+                        margin-top: 1rem;
+                    }
+
+                    h1 {
+                        font-size: 2.4rem;
+                        font-weight: bolder;
+                    }
+
+                    h1+p {
+                        font-size: 1.6rem;
+                    }
+
+                    label {
+                        b {
+                            font-size: 1.6rem;
+                        }
+                    }
+
+                    input[type=text] {
+                        width: 100%;
+                        padding: 1.5rem;
+                        margin: .5rem 0 2.2rem 0;
+                        display: inline-block;
+                        border: none;
+                        background: var(--text-color-hover);
+                        font-size: 1.4rem;
+                        font-weight: 600;
+                    }
+
+                    input[type=text]:focus {
+                        background-color: var(--link);
+                        outline: none;
+                        color: var(--bg-color);
+                    }
+
+                    input[type=text]::placeholder {
+                        color: var(--bg-color);
+                    }
+
+
+
+                    .registerbtn {
+                        background-color: var(--link);
+                        color: var(--bg-color);
+                        padding: 1.6rem 2rem;
+                        margin: .8rem 0;
+                        border: none;
+                        cursor: pointer;
+                        width: 100%;
+                        opacity: 0.9;
+                        font-size: 1.6rem;
+                        font-weight: 600;
+
+                        &:hover {
+                            opacity: 1;
+                        }
+
+                    }
+
+                    a {
+                        color: var(--link);
+                    }
+
+                }
+
+                .signin {
+                    background-color: var(--bg-color);
+                    text-align: center;
+                    font-size: 1.6rem;
+                    padding: 1rem 0;
+
+                }
             }
         }
     }

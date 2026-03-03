@@ -1,0 +1,90 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}
+    WinMaster - Kompaniya üçün Qeydiyyat
+{% endblock %}
+
+{% block styles %}
+
+    <script>
+        if(!localStorage.getItem("finished_my_ans")){
+            window.location.href = "/"
+        }
+    </script>
+
+    {% if colors %}
+        <style>
+            {% for c in colors %}
+                :root{
+                    {{c.color_name}}: {{c.color_hex}};
+                }
+            {% endfor %}
+        </style>
+    {% endif %}
+{% endblock %}
+
+{% block root %}
+
+    <div class="register">
+        <form>
+            <div class="container">
+                <h1>Təbriklər</h1>
+                <p>Kompaniyaya qoşularaq qiymət təklifi almaq üçün sonuncu mərhələdəsiniz</p>
+                <hr>
+
+                <label for="name">
+                    <b>Adınız *</b>
+                </label>
+                <input type="text" placeholder="Adınızı daxil edin" autocomplete="new-winmaster-name" name="name" id="name" required>
+
+                <label for="surname">
+                    <b>Soyadınız *</b>
+                </label>
+                <input type="text" placeholder="Soyadınızı daxil edin" autocomplete="new-winmaster-surname" name="surname" id="surname" required>
+
+                <label for="phone">
+                    <b>Telefon *</b>
+                </label>
+                <input type="text" placeholder="Telefon nömrənizi daxil edin" autocomplete="new-winmaster-phone" name="phone" id="phone" required>
+
+                <label for="email">
+                    <b>E-poçt *</b>
+                </label>
+                <input type="text" placeholder="E-poçt daxil edin" autocomplete="off" name="email" id="email" required>
+
+                <label for="location">
+                    <b>Şəhər/Rayon *</b>
+                </label>
+                <input type="text" placeholder="Şəhər/Rayon daxil edin" autocomplete="new-winmaster-location" name="location" id="location" required>
+
+                <label for="projectlocation">
+                    <b>Layihə ünvanı (istəyə bağlı)</b>
+                </label>
+                <input type="text" placeholder="Layihə ünvanı" autocomplete="off" name="projectlocation" id="projectlocation" required>
+
+
+                <hr>
+
+                <button type="submit" class="registerbtn">Tamamla</button>
+            </div>
+            
+            <div class="container signin">
+                <p>Suallara verdiyim cavabı <a href="{% url 'quizpage' %}" id="reset-form">dəyişmək istəyirəm</a></p>
+            </div>
+            <br><br><br>
+        </form>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        let reset_form = document.getElementById("reset-form")
+        reset_form.addEventListener("click", function(e){
+            e.preventDefault()
+            localStorage.clear()
+            window.location.href = e.target.getAttribute("href")
+        })
+    </script>
+{% endblock %}
