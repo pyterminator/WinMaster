@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Shukurov Mushvig - Winmaster.az">
+    <meta name="description" content="Keyfiyyətli PVC, cambalkon, qapı pəncərə sistemləri, sürmə qapı, alüminium pəncələr, şüşələr, ofis arakəsmələrinin tək ünvanı">
+    <meta name="keywords" content="qapı, qapi, pencere, pəncərə, qapı pəncərə, qapi pencere, sürmə qapı, surme qapi, cam balkon, suse, suse balkon, şüşə, şüşə balkon, pvc, izosistem, sürme qapi, sürmə qapı, qapı sistmei, arakəsmə, alüminimum, aluminium, aluminimum pencere, aluminimum qapi, taxta pencere, taxta pəncərə, vitrin sistemi, kabine qapi, kabine mebel, kabine suse, suseli kabine, tent, suse qapi, şüşə qapı, suse pencere, şüşə pəncərə, dus kabin, duş kabin, smart suse, smart şüşə">
+   
+    <title>{% block title %}WinMaster - Cam Balkon Sistemləri – Bakıda Pulsuz Ölçü və Qiymət Təklif Meneceri{% endblock %}</title>
+
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
+
+
+    <link rel="shortcut icon" href="{% static 'images/cropped-favicon-1-48x48.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/style.min.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script>
+        window.onload = function () {
+            setTimeout(() => {
+                document.getElementById("loader").style.display = "none";
+            }, 100);
+        };
+    </script>
+    {% block styles %}{% endblock %}
+</head>
+
+<body>
+    <div class="loader-container" id="loader">
+        <div class="loader"></div>
+    </div>
+    <div id="root">
+        {% block root %} {% endblock %}
+    </div>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+    {% block scripts %} {% endblock %}
+</body>
+
+</html>

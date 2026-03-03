@@ -1,0 +1,220 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}
+    WinMaster - Təklif meneceri suallarını cavablayın
+{% endblock %}
+
+
+{% block styles %}
+{% if colors %}
+    <style>
+        {% for c in colors %}
+            :root{
+                {{c.color_name}}: {{c.color_hex}};
+            }
+        {% endfor %}
+    </style>
+{% endif %}
+{% endblock %}
+
+
+{% block root %}
+
+<div class="return">
+    <a href="{% url 'homepage' %}">
+        <i class="fa-regular fa-house"></i> Ana səhifəyə qayıt
+    </a>
+</div>
+
+<div class="quiz" >
+    <svg id="visual" viewBox="0 0 900 600">
+        <path d="M0 496L100 496L100 516L200 516L200 536L300 536L300 533L400 533L400 496L500 496L500 551L600 551L600 514L700 514L700 572L800 572L800 543L900 543L900 540L900 601L900 601L800 601L800 601L700 601L700 601L600 601L600 601L500 601L500 601L400 601L400 601L300 601L300 601L200 601L200 601L100 601L100 601L0 601Z" style="transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1); fill:var(--link); opacity:0.6;"></path>
+        <path d="M0 526L100 526L100 572L200 572L200 573L300 573L300 513L400 513L400 543L500 543L500 570L600 570L600 515L700 515L700 570L800 570L800 540L900 540L900 536L900 601L900 601L800 601L800 601L700 601L700 601L600 601L600 601L500 601L500 601L400 601L400 601L300 601L300 601L200 601L200 601L100 601L100 601L0 601Z" style="transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1); fill:var(--link); opacity:0.2;"></path>
+        <path d="M0 575L100 575L100 571L200 571L200 588L300 588L300 539L400 539L400 568L500 568L500 536L600 536L600 532L700 532L700 534L800 534L800 539L900 539L900 560L900 601L900 601L800 601L800 601L700 601L700 601L600 601L600 601L500 601L500 601L400 601L400 601L300 601L300 601L200 601L200 601L100 601L100 601L0 601Z" style="transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1); fill:var(--link); opacity:0.9;"></path>
+        <path d="M0 556L100 556L100 591L200 591L200 586L300 586L300 576L400 576L400 559L500 559L500 567L600 567L600 575L700 575L700 592L800 592L800 583L900 583L900 592L900 601L900 601L800 601L800 601L700 601L700 601L600 601L600 601L500 601L500 601L400 601L400 601L300 601L300 601L200 601L200 601L100 601L100 601L0 601Z" style="transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1); fill:var(--link); opacity:0.5;"></path>
+    </svg>
+
+    <div class="container">
+        <div class="title">
+            <img src="{% static 'images/quizz.jpg' %}" alt="Quiz" draggable="false" id="title-after-img">
+            <p></p>
+        </div>
+        <form novalidate id="question-form" onsubmit="javascript:void(0)"></form> 
+    </div>
+</div>
+
+<div class="quiz-container">
+    <div class="container" id="general-q">
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+    <script>
+
+        if(localStorage.getItem("finished_my_ans")){
+            nextQuestion()
+        } else {
+            if (!localStorage.getItem("my_ans")){
+                fetch("/getquiz")
+                    .then(res => res.json())
+                    .then(data => {
+                        questions = data;
+                        localStorage.removeItem("winmaster_qs");
+                        localStorage.setItem("winmaster_qs", JSON.stringify(questions));
+                        fillQuestion()
+                    });
+            } else {
+                let my_ans = JSON.parse(localStorage.getItem("my_ans"))
+                let question_ids = Object.keys(my_ans)
+                let last_question_id = question_ids[question_ids.length - 1];
+                let lastQuestionOption = my_ans[last_question_id];
+                fillQuestion(last_question_id, lastQuestionOption)
+            }
+        }
+
+        
+        
+
+        function fillQuestion(q_id=null, opt_id=null){
+            let questions = JSON.parse(localStorage.getItem("winmaster_qs"))
+            let title_after_img = document.getElementById("title-after-img")
+            let question_form = document.getElementById("question-form")
+            question_form.innerHTML=""
+
+            if (q_id == null & opt_id == null){
+                title_after_img.nextElementSibling.innerText = questions[0].title
+                questions[0]["options"].forEach(opt => { 
+                    question_form.innerHTML += `
+                        <label for="option-${opt.id}">
+                            <input type="radio" name="quiz-${questions[0].id}" id="option-${opt.id}" option-id="${opt.id}" quiz-id="${questions[0].id}">
+                            <span></span>
+                            <p>
+                                ${opt.text}
+                            </p>
+                        </label>
+                    `
+                });
+                question_form.innerHTML += `
+                    <div class="button">
+                        <svg id="next" onclick='svgClick(this)' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 180"><path d="M740 160c-404-22.1-338.3-21.5-730 0l30-70-30-70c404 22.1 338.3 21.5 730 0l-30 70 30 70Z"></path></svg>
+                        <button id="realBtn" type="button" onclick="saveMyAns(this)">Təsdiqlə</button>
+                    </div>
+                `
+            } else {
+                questions.forEach(q => {
+                    if(q.id == q_id){
+                        title_after_img.nextElementSibling.innerText = q.title
+                        q['options'].forEach(opt=>{
+                            if(opt.id == opt_id){
+                                question_form.innerHTML += `
+                                    <label for="option-${opt.id}">
+                                        <input type="radio" name="quiz-${q_id}" id="option-${opt.id}" option-id="${opt.id}" quiz-id="${q_id}" checked>
+                                        <span></span>
+                                        <p>
+                                            ${opt.text}
+                                        </p>
+                                    </label>
+                                `
+                            } else{
+                                question_form.innerHTML += `
+                                    <label for="option-${opt.id}">
+                                        <input type="radio" name="quiz-${q_id}" id="option-${opt.id}" option-id="${opt.id}" quiz-id="${q_id}">
+                                        <span></span>
+                                        <p>
+                                            ${opt.text}
+                                        </p>
+                                    </label>
+                                `
+                            }
+                        })
+                         
+                        question_form.innerHTML += `
+                            <div class="button">
+                                <svg id="next" onclick='svgClick(this)' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 180"><path d="M740 160c-404-22.1-338.3-21.5-730 0l30-70-30-70c404 22.1 338.3 21.5 730 0l-30 70 30 70Z"></path></svg>
+                                <button id="realBtn" type="button" onclick="saveMyAns(this)">Təsdiqlə</button>
+                            </div>
+                        `
+                    }
+                });
+            }
+        }
+
+        
+
+        function saveMyAns(btn){
+            let my_form = btn.parentElement.parentElement
+            let checked_ans = my_form.querySelector("input:checked")
+            if (checked_ans){
+                let quiz_id = checked_ans.getAttribute("quiz-id")
+                let option_id = checked_ans.getAttribute("option-id")
+                let my_ans = {}
+                if (localStorage.getItem("my_ans")){
+                    my_ans = JSON.parse(localStorage.getItem("my_ans"))
+                    my_ans[quiz_id] = option_id
+                } else {
+                    my_ans[quiz_id] = option_id
+                }
+                localStorage.setItem("my_ans", JSON.stringify(my_ans))
+                nextQuestion(parseInt(quiz_id))
+            }
+        }
+
+        function nextQuestion(q_id){
+            let questions = JSON.parse(localStorage.getItem("winmaster_qs"))
+            
+            let foundNext = questions.some(q => {
+                if(q.id == q_id + 1){
+                    fillQuestion(q.id);
+                    return true;
+                }
+            });
+
+            if(!foundNext){ 
+                let general_q = document.getElementById("general-q")
+                let my_ans = JSON.parse(localStorage.getItem("my_ans"))
+                let html_quiz = document.querySelector(".quiz")
+                html_quiz.style.display = "none"
+                general_q.parentElement.style.display = "block"
+                localStorage.setItem("finished_my_ans", true)
+
+                for (let index = 0; index < questions.length; index++) {
+                    let options_html = ""
+                    questions[index].options.forEach(o => {
+                        if (my_ans[questions[index].id] == o.id){
+                            options_html+=`<div class="option selected">${o.text}</div>`
+                        } else {
+                            options_html+=`<div class="option">${o.text}</div>`
+                        }
+                    });
+
+                    general_q.innerHTML += `
+                        <h2 class="question">Sual ${index+1}: ${questions[index].title} </h2>
+                        <div class="options"> ${options_html} </div>
+                    `
+                }
+                general_q.innerHTML += `
+                    <div id='settings'>
+                        <button id='reset' onclick='reset(this)'>Yenidən başlat</button>
+                        <button id='confirm'>Təsdiqlə</button>
+                    </div>
+                `
+            }
+            
+        }
+
+        function reset(btn){
+            localStorage.removeItem("my_ans")
+            localStorage.removeItem("finished_my_ans")
+            window.location.reload()
+        }
+
+        function svgClick(sv){
+            sv.nextElementSibling.click(); 
+        }
+
+    </script>
+{% endblock %}

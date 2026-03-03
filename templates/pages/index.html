@@ -1,0 +1,257 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}
+    WinMaster - Cam Balkon Sistemləri – Bakıda Pulsuz Ölçü və Qiymət Təklif Meneceri
+{% endblock %}
+
+{% block styles %}
+{% if colors %}
+    <style>
+        {% for c in colors %}
+            :root{
+                {{c.color_name}}: {{c.color_hex}};
+            }
+        {% endfor %}
+    </style>
+{% endif %}
+{% endblock %}
+
+
+{% block root %}
+
+<header>
+    <div class="container">
+        <h1>
+            WinMaster - Cam Balkon Sistemləri – Bakıda Pulsuz Ölçü və Qiymət Təklif Meneceri
+        </h1>
+        <img src="{% static 'images/winmaster-logo-header.png' %}" id="winmaster-logo" loading="lazy" alt="WinMaster" draggable="false" data-url="https://www.winmaster.az">
+        <div class="phone">
+            <a href="tel:+994503405060">(050) 340 50 60</a>
+        </div>
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                {% for s in sentences %}
+                <h2 class="swiper-slide">
+                    <p>
+                        {{s.text}}
+                    </p>
+                </h2>
+                {% endfor %}
+            </div>
+            <div class="swiper-pagination"></div>
+             
+        </div>
+
+    </div>
+</header>
+
+<div class="cards">
+    <div class="container">
+        <div class="card">
+            <i class="fa-solid fa-users"></i>
+            <p>Müştəri sayı</p>
+            <p>3500+</p>
+        </div>
+        <div class="card">
+            <i class="fa-solid fa-share-nodes"></i>
+            <p>Sosial media</p>
+            <button id="open-social-media-links">
+                <i class="fa-solid fa-angle-down"></i>
+            </button>
+            <div class="media-links animate__animated animate__headShake">
+                {% if social_media %}
+                    {% for sm in social_media %}
+                        <div class="media-link">
+                            {% if sm.name == "İnstagram" %}
+                                <i class="fa-brands fa-instagram"></i>
+                                <a href="{{sm.link}}">{{sm.name}}</a>
+                            {% elif sm.name == "Facebook" %}
+                                <i class="fa-brands fa-facebook"></i>
+                                <a href="{{sm.link}}">{{sm.name}}</a>
+                            {% elif sm.name == "E-poçt" %}
+                                <i class="fa-solid fa-envelope"></i>
+                                <a href="mailto:{{sm.link}}">{{sm.link}}</a>
+                            {% elif sm.name == "Telefon" %}
+                                <i class="fa-solid fa-phone"></i>
+                                <a href="tel:+994{{sm.link}}">{{sm.link}}</a>
+                            {% endif %}
+                            
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <div class="card">
+            <i class="fa-solid fa-building"></i>
+            <p>Korporativ nömrə</p>
+            <p>(050) 340 50 60</p>
+        </div>
+    </div>
+</div>
+
+
+<div class="calculator-card">
+    <div class="yelo-steps">
+        <h2>
+            Qiymət təklifi alaraq kompaniyalarımıza qoşulmaq çox asandır
+        </h2>
+        <p>
+            Sualları cavablayaraq bir neçə addımda bizdən obyektinizə uyğun təklifi çox rahat şəkildə əldə edə bilərsiniz
+        </p>
+        <div class="steps">
+            <div class="step">
+                <div class="step-id">1</div>
+                <p>
+                    Sualları cavablayın
+                </p>
+            </div>
+            <div class="step">
+                <div class="step-id">2</div>
+                <p>
+                    Təsdiq mesajımızı alın
+                </p>
+            </div>
+            <div class="step">
+                <div class="step-id">3</div>
+                <p>
+                    Kompaniyaya qoşulun
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="left">
+            <img src="{% static 'images/calculator.png' %}" loading="lazy" alt="Calculator"  draggable="false">
+            <div class="text">
+                <h3>Bir neçə sadə sualı cavablayın</h3>
+                <p>
+                    Qiymət hesablaması, ideal təkliflər, layihələrimizin şəkillərini pulsuz əldə edin
+                </p>
+            </div>
+        </div>
+        <div class="right">
+            <span class="before"></span>
+            <span class="after"></span>
+
+            <button id="getQuizPage" data-url="{% url 'quizpage' %}">
+                Sualları cavablamağa başlaraq <br> kompaniyaya qoşulun
+            </button>
+            <img src="{% static 'images/tap.png' %}" alt="Kliklə" loading="lazy"  draggable="false">
+        </div>
+    </div> 
+</div>
+
+
+<div class="instructions">
+    <div class="container">
+        <h2>Pəncərə və qapı sistemləri</h2>
+        <div class="swiper mySwiperInstructions">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="{% static 'images/deco-senza-cerniera-1-1536x1536-1-5.jpg' %}" alt="Deco senza"  loading="lazy" draggable="false">
+                    <h3>
+                        İzosistem alüminium pəncərə və qapı
+                    </h3>
+                </div>
+                <div class="swiper-slide">
+                    <img src="{% static 'images/deco-senza-cerniera-1-1536x1536-1-7.jpg' %}" alt="Deco senza" loading="lazy" draggable="false">
+                    <h3>
+                        Taxta - alüminium pəncərə və qapı
+                    </h3>
+                </div>
+                <div class="swiper-slide">
+                    <img src="{% static 'images/deco-senza-cerniera-1-1536x1536-1-8.jpg' %}" alt="Deco senza" loading="lazy" draggable="false">
+                    <h3>
+                        PVC - pəncərə və qapı sistemi
+                    </h3>
+                </div>
+                <div class="swiper-slide">
+                    <img src="{% static 'images/deco-senza-cerniera-1-1536x1536-1-9.jpg' %}" alt="Deco senza" loading="lazy" draggable="false">
+                    <h3>
+                        C55 - Vitrin sistemləri
+                    </h3>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+      </div>
+    </div>
+</div>
+
+<footer>
+    <div class="container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3037.8283297971493!2d49.85802227582712!3d40.41265367144022!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40307d55f63cc39d%3A0x5351370816202e4b!2sEsra%20Plaza!5e0!3m2!1saz!2saz!4v1772481917375!5m2!1saz!2saz" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div class="bottom">
+            <i class="fa-regular fa-copyright"></i> {% now "Y" %} - WİNMASTER Bütün hüquqlar qorunur
+        </div>
+    </div>
+</footer>
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+    let winmaster_logo = document.getElementById("winmaster-logo")
+    winmaster_logo.addEventListener("click", function(e){
+        let Link_a = document.createElement('a')
+        Link_a.setAttribute("href", winmaster_logo.getAttribute("data-url"))
+        Link_a.setAttribute("target", "_blank")
+        Link_a.click()
+    })
+
+    let getQuizPage = document.getElementById("getQuizPage")
+    getQuizPage.addEventListener("click", function(e){
+        let Link_a = document.createElement('a')
+        Link_a.setAttribute("href", getQuizPage.getAttribute("data-url"))
+        Link_a.click()
+    })
+
+    let openSocial = document.getElementById("open-social-media-links")
+    openSocial.addEventListener("click", function(e){
+        let socialMediaLinks = document.querySelector(".media-links")
+        if(getComputedStyle(socialMediaLinks).display == "none"){
+            socialMediaLinks.style.display = "flex";
+            openSocial.innerHTML = `<i class="fa-solid fa-angle-up"></i>`
+        } else {
+            socialMediaLinks.style.display = "none"
+            openSocial.innerHTML = `<i class="fa-solid fa-angle-down"></i>`
+
+        }
+    })
+    var swiper = new Swiper(".mySwiper", {
+        direction: "vertical",
+        spaceBetween: 30,
+        grabCursor: true,
+        loop: true,
+        effect: "cube",
+        mousewheel: true,
+        keyboard: {
+            enabled: true,
+        },
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+        }, 
+        pagination: {
+            el: ".swiper-pagination",
+            dynamicBullets: true,
+            clickable: true,
+        },
+    });
+
+    var swiper = new Swiper(".mySwiperInstructions", {
+        effect: "fade",
+        grabCursor: true,
+        loop: true,
+        autoplay: {
+            delay: 1000,
+            disableOnInteraction: false,
+        }, 
+        pagination: {
+            el: ".swiper-pagination",
+            dynamicBullets: true,
+            clickable: true,
+        },
+    });
+</script>
+{% endblock %}
