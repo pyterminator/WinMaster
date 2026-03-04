@@ -20,6 +20,7 @@ html {
         overflow: hidden;
         overflow-x: hidden;
         overflow-y: hidden;
+
         .loader-container {
             position: fixed;
             top: 0;
@@ -626,7 +627,6 @@ html {
                 }
             }
 
-
             .quiz-container {
                 display: none;
                 max-width: 100%;
@@ -734,19 +734,75 @@ html {
                         margin: .5rem 0 2.2rem 0;
                         display: inline-block;
                         border: none;
-                        background: var(--text-color-hover);
+                        background: var(--link);
                         font-size: 1.4rem;
                         font-weight: 600;
-                    }
-
-                    input[type=text]:focus {
-                        background-color: var(--link);
                         outline: none;
                         color: var(--bg-color);
+
+                        &::placeholder {
+                            color: var(--bg-color);
+                        }
                     }
 
-                    input[type=text]::placeholder {
-                        color: var(--bg-color);
+                    label[for=phone] {
+                        position: relative;
+                        display: block;
+
+                        i {
+                            position: absolute;
+                            top: 3.5rem;
+                            left: 0;
+                            width: 3rem;
+                            height: 3rem;
+                            z-index: 100;
+                            line-height: 3rem;
+                            text-align: center;
+                            font-size: 1.4rem;
+                            color: var(--bg-color);
+                        }
+                    }
+
+                    input[name=phone] {
+                        padding-left: 3.5rem;
+                    }
+
+                    #mexfilik-label {
+                        cursor: pointer;
+
+                        #mexfilik {
+                            &:checked+b {
+                                span {
+                                    color: var(--bg-color);
+                                    background-color: var(--link);
+                                }
+                            }
+                        }
+
+                        b {
+                            display: flex;
+                            justify-content: flex-start;
+                            align-items: center;
+
+
+                            span {
+                                width: 2rem;
+                                height: 2rem;
+                                background-color: var(--bg-color);
+                                color: var(--link);
+                                overflow: hidden;
+                                display: inline-block;
+                                margin-right: .5rem;
+                                text-align: center;
+                                line-height: 1.8rem;
+                                font-size: 1.4rem;
+                                border: .1rem solid var(--link);
+                            }
+
+                            a {
+                                margin-right: .3rem;
+                            }
+                        }
                     }
 
 
@@ -781,6 +837,39 @@ html {
                     font-size: 1.6rem;
                     padding: 1rem 0;
 
+                }
+            }
+
+            .start-quiz {
+                width: 100%;
+                height: 10rem;
+                position: relative;
+
+                svg {
+                    width: 100%;
+                    height: 10rem;
+                }
+
+                a {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    font-size: 2rem;
+                    background-color: var(--bg-color);
+                    transition: all .1s ease-in;
+                    color: var(--link);
+                    padding: 1rem;
+                    border-radius: 2rem;
+                    font-weight: bolder;
+                    box-shadow: .1rem .1rem .5rem .1rem var(--link);
+
+                    &:hover {
+                        background-color: var(--link);
+                        color: var(--bg-color);
+                        border-radius: 3rem;
+                        box-shadow: .1rem .1rem .5rem .1rem var(--bg-color);
+                    }
                 }
             }
         }
@@ -824,6 +913,8 @@ html {
         body {
             #root {
                 header {
+                    padding: 0 1rem;
+
                     .container {
                         .mySwiper {
                             .swiper-wrapper {
@@ -978,6 +1069,77 @@ html {
                                 .swiper-pagination-bullet {
                                     background-color: var(--link);
                                 }
+                            }
+                        }
+                    }
+                }
+
+                .start-quiz {
+                    a {
+                        font-size: 1.4rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    html {
+        body {
+            #root {
+                .calculator-card {
+                    .container {
+                        .right {
+                            button {
+                                font-size: 1.4rem;
+                            }
+
+                            img {
+                                display: none;
+                            }
+                        }
+                    }
+                }
+
+                .quiz {
+                    .container {
+                        .title {
+                            img {
+                                display: none;
+                            }
+                        }
+                    }
+
+                    &>svg {
+                        bottom: 0;
+                    }
+                }
+
+                .calculator-card {
+                    .yelo-steps {
+                        .steps {
+                            margin-bottom: 1rem;
+                            flex-direction: column;
+
+                            .step {
+                                margin-bottom: 1rem;
+
+                                .step-id {
+                                    margin-bottom: .5rem;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .instructions {
+                    margin: 10rem 0;
+
+                    .container {
+                        .mySwiperInstructions {
+                            .swiper-wrapper {
+                                width: 30rem;
                             }
                         }
                     }

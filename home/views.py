@@ -5,6 +5,7 @@ from django.http import JsonResponse
 
 def index(request):
     success = request.session.pop("form_success", False)
+    
     social_media_links = SocialMedia.objects.all()
     colors = RootColor.objects.all()
     sentences = Sentence.objects.all()
@@ -38,18 +39,20 @@ def get_quiz(request):
     return JsonResponse(data, safe=False)
 
 def register(request):
+    colors = RootColor.objects.all()
+    invalid = request.session.pop("form_invalid", False)
     if request.method == "POST":
-        name = request.POST.get("name")
-        surname = request.POST.get("surname")
+        fullname = request.POST.get("fullname") 
         phone = request.POST.get("phone")
-        email = request.POST.get("email")
-        location = request.POST.get("location")
-        projectlocation = request.POST.get("projectlocation")
+        mexfilik = request.POST.get("mexfilik")
         user_answer = request.POST.get("user_answer")
         user_answer = json.loads(user_answer)
 
+        if not bool(mexfilik):
+            request.session["form_invalid"] = True
+            return redirect("registerpage")
 
-        new_user_data = UserData(name=name, surname=surname, phone=phone, email=email, location=location, project_location=projectlocation)
+        new_user_data = UserData(fullname=fullname, phone=phone)
         new_user_data.save()
         
         keys = user_answer.keys()
@@ -69,5 +72,8 @@ def register(request):
             
         
 
-
-    return render(request, "pages/register.html")
+    data={
+        "colors": colors,
+        "invalid":invalid
+    }
+    return render(request, "pages/register.html", context=data)

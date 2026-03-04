@@ -34,35 +34,31 @@
                 <p>Kompaniyaya qoşularaq qiymət təklifi almaq üçün sonuncu mərhələdəsiniz</p>
                 <hr>
 
-                <label for="name">
-                    <b>Adınız *</b>
+                <label for="fullname">
+                    <b>Ad, Soyad</b>
                 </label>
-                <input type="text" placeholder="Adınızı daxil edin" autocomplete="new-winmaster-name" name="name" id="name" required>
+                <input type="text" placeholder="Ad, Soyad" autocomplete="off" name="fullname" id="fullname" required>
 
-                <label for="surname">
-                    <b>Soyadınız *</b>
-                </label>
-                <input type="text" placeholder="Soyadınızı daxil edin" autocomplete="new-winmaster-surname" name="surname" id="surname" required>
-
+                
                 <label for="phone">
                     <b>Telefon *</b>
+                    <i class="fa-solid fa-phone-flip"></i>
                 </label>
-                <input type="text" placeholder="Telefon nömrənizi daxil edin" autocomplete="new-winmaster-phone" name="phone" id="phone" required>
+                <input type="text" placeholder="Telefon nömrəniz" autocomplete="off" name="phone" id="phone" required>
 
-                <label for="email">
-                    <b>E-poçt *</b>
+                <label for="mexfilik" id="mexfilik-label">
+                    <input type="checkbox" id="mexfilik" name="mexfilik" style="display: none;" checked>
+                    <b>
+                        <span>
+                            <i class="fa-solid fa-check"></i>
+                        </span>
+                        <a href="#">
+                            Məxfilik siyasəti
+                        </a>
+                        ilə razıyam
+                    </b>
                 </label>
-                <input type="text" placeholder="E-poçt daxil edin" autocomplete="off" name="email" id="email" required>
-
-                <label for="location">
-                    <b>Şəhər/Rayon *</b>
-                </label>
-                <input type="text" placeholder="Şəhər/Rayon daxil edin" autocomplete="new-winmaster-location" name="location" id="location" required>
-
-                <label for="projectlocation">
-                    <b>Layihə ünvanı (istəyə bağlı)</b>
-                </label>
-                <input type="text" placeholder="Layihə ünvanı" autocomplete="off" name="projectlocation" id="projectlocation">
+                
 
                 <input type="hidden" name="user_answer" id="user_answer">
                 <hr>
@@ -91,4 +87,9 @@
         let user_answer = document.getElementById("user_answer")
         user_answer.value = JSON.stringify(JSON.parse(localStorage.getItem("my_ans")))
     </script>
+    {% if invalid %}
+        <script>
+            alert("Müraciət üçün məxfilik siyasətimizi qəbul etməlisiniz")
+        </script>
+    {% endif %}
 {% endblock %}
