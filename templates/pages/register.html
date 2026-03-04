@@ -27,7 +27,8 @@
 {% block root %}
 
     <div class="register">
-        <form>
+        <form method="post">
+            {% csrf_token %}
             <div class="container">
                 <h1>Təbriklər</h1>
                 <p>Kompaniyaya qoşularaq qiymət təklifi almaq üçün sonuncu mərhələdəsiniz</p>
@@ -61,9 +62,9 @@
                 <label for="projectlocation">
                     <b>Layihə ünvanı (istəyə bağlı)</b>
                 </label>
-                <input type="text" placeholder="Layihə ünvanı" autocomplete="off" name="projectlocation" id="projectlocation" required>
+                <input type="text" placeholder="Layihə ünvanı" autocomplete="off" name="projectlocation" id="projectlocation">
 
-
+                <input type="hidden" name="user_answer" id="user_answer">
                 <hr>
 
                 <button type="submit" class="registerbtn">Tamamla</button>
@@ -86,5 +87,8 @@
             localStorage.clear()
             window.location.href = e.target.getAttribute("href")
         })
+
+        let user_answer = document.getElementById("user_answer")
+        user_answer.value = JSON.stringify(JSON.parse(localStorage.getItem("my_ans")))
     </script>
 {% endblock %}

@@ -254,4 +254,12 @@
         },
     });
 </script>
+
+{% if success %}
+    <script>
+        alert("Müraciətiniz qeydə alındı, sizinlə tezliklə əlaqə saxlanılacaq.")
+        localStorage.clear()
+    </script>
+{% endif %}
+
 {% endblock %}

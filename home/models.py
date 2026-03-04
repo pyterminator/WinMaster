@@ -42,3 +42,26 @@ class Sentence(models.Model):
     def __str__(self):
         return self.text
 
+class UserData(models.Model):
+    name = models.CharField(max_length=100)
+    surname = models.CharField(max_length=100)
+    phone = models.CharField(max_length=30)
+    email = models.EmailField(max_length=255)
+    location = models.CharField(max_length=255)
+    project_location = models.CharField(max_length=255, blank=True, null=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.name} {self.surname} - {self.phone}"
+
+class UserAnswer(models.Model):
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    selected_option = models.ForeignKey(Option, on_delete=models.CASCADE)
+
+    user = models.ForeignKey(UserData, on_delete=models.CASCADE)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.name} - {self.question}"

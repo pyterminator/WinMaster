@@ -56,7 +56,7 @@
     <script>
 
         if(localStorage.getItem("finished_my_ans")){
-            nextQuestion()
+            confirmForm()
         } else {
             if (!localStorage.getItem("my_ans")){
                 fetch("/getquiz")
