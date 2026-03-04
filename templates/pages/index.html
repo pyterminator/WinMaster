@@ -46,20 +46,61 @@
     </div>
 </header>
 
-<div class="start-quiz">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100">
-        <g style="fill:var(--link);">
-            <path d="M0 100V0h1000v4L0 100z"></path>
-            <path d="M0 100V0h1000v24L0 100z" opacity=".85"></path>
-            <path d="M0 100V0h1000v44L0 100z" opacity=".75"></path>
-            <path d="M0 100V0h1000v64L0 100z" opacity=".65"></path>
-            <path d="M0 100V0h1000v84L0 100z" opacity=".55"></path>
-        </g>
-    </svg>
-    <a href="{% url 'quizpage' %}">
-        Sualları cavablayaraq <br> kompaniyaya qoşulun
-    </a>
+<div class="calculator-card">
+     <div class="container">
+        <div class="left">
+            <img src="{% static 'images/calculator.png' %}" loading="lazy" alt="Calculator"  draggable="false">
+            <div class="text">
+                <h3>Bir neçə sadə sualı cavablayın</h3>
+                <p>
+                    Qiymət hesablaması, ideal təkliflər, layihələrimizin şəkillərini pulsuz əldə edin
+                </p>
+            </div>
+        </div>
+        <div class="right">
+            <span class="before"></span>
+            <span class="after"></span>
+
+            <button id="getQuizPage" data-url="{% url 'quizpage' %}">
+                Sualları cavablayaraq <br> kompaniyaya qoşulun
+            </button>
+            <img src="{% static 'images/tap.png' %}" alt="Kliklə" loading="lazy"  draggable="false">
+        </div>
+    </div> 
+    <div class="yelo-steps">
+        <h2>
+            Qiymət təklifi alaraq kompaniyalarımıza qoşulmaq çox asandır
+        </h2>
+        <p>
+            Sualları cavablayaraq bir neçə addımda bizdən obyektinizə uyğun təklifi çox rahat şəkildə əldə edə bilərsiniz
+        </p>
+        <div class="steps">
+            <div class="step">
+                <div class="step-id">1</div>
+                <p>
+                    Sualları cavablayın
+                </p>
+            </div>
+            <div class="step">
+                <div class="step-id">2</div>
+                <p>
+                    Təsdiq mesajımızı alın
+                </p>
+            </div>
+            <div class="step">
+                <div class="step-id">3</div>
+                <p>
+                    Kompaniyaya qoşulun
+                </p>
+            </div>
+        </div>
+    </div>
+   
 </div>
+
+
+
+
 
 <div class="cards">
     <div class="container">
@@ -103,58 +144,6 @@
             <p>(050) 340 50 60</p>
         </div>
     </div>
-</div>
-
-
-<div class="calculator-card">
-    <div class="yelo-steps">
-        <h2>
-            Qiymət təklifi alaraq kompaniyalarımıza qoşulmaq çox asandır
-        </h2>
-        <p>
-            Sualları cavablayaraq bir neçə addımda bizdən obyektinizə uyğun təklifi çox rahat şəkildə əldə edə bilərsiniz
-        </p>
-        <div class="steps">
-            <div class="step">
-                <div class="step-id">1</div>
-                <p>
-                    Sualları cavablayın
-                </p>
-            </div>
-            <div class="step">
-                <div class="step-id">2</div>
-                <p>
-                    Təsdiq mesajımızı alın
-                </p>
-            </div>
-            <div class="step">
-                <div class="step-id">3</div>
-                <p>
-                    Kompaniyaya qoşulun
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="left">
-            <img src="{% static 'images/calculator.png' %}" loading="lazy" alt="Calculator"  draggable="false">
-            <div class="text">
-                <h3>Bir neçə sadə sualı cavablayın</h3>
-                <p>
-                    Qiymət hesablaması, ideal təkliflər, layihələrimizin şəkillərini pulsuz əldə edin
-                </p>
-            </div>
-        </div>
-        <div class="right">
-            <span class="before"></span>
-            <span class="after"></span>
-
-            <button id="getQuizPage" data-url="{% url 'quizpage' %}">
-                Sualları cavablayaraq <br> kompaniyaya qoşulun
-            </button>
-            <img src="{% static 'images/tap.png' %}" alt="Kliklə" loading="lazy"  draggable="false">
-        </div>
-    </div> 
 </div>
 
 

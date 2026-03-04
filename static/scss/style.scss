@@ -240,7 +240,7 @@ html {
                         align-items: flex-start;
                         max-width: 70rem;
                         margin: 0 auto;
-                        margin-bottom: 5rem;
+                        
 
                         .step {
                             width: 20rem;
@@ -305,6 +305,7 @@ html {
                     gap: 1rem;
                     max-width: 100rem;
                     margin: 0 auto;
+                    margin-bottom: 5rem;
 
                     .left {
                         width: 50%;
@@ -839,39 +840,6 @@ html {
 
                 }
             }
-
-            .start-quiz {
-                width: 100%;
-                height: 10rem;
-                position: relative;
-
-                svg {
-                    width: 100%;
-                    height: 10rem;
-                }
-
-                a {
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    font-size: 2rem;
-                    background-color: var(--bg-color);
-                    transition: all .1s ease-in;
-                    color: var(--link);
-                    padding: 1rem;
-                    border-radius: 2rem;
-                    font-weight: bolder;
-                    box-shadow: .1rem .1rem .5rem .1rem var(--link);
-
-                    &:hover {
-                        background-color: var(--link);
-                        color: var(--bg-color);
-                        border-radius: 3rem;
-                        box-shadow: .1rem .1rem .5rem .1rem var(--bg-color);
-                    }
-                }
-            }
         }
     }
 }
@@ -947,7 +915,9 @@ html {
                 }
 
                 .calculator-card {
+                    margin-top: 1rem;
                     .yelo-steps {
+                        padding: 1rem;
                         .steps {
                             .step {
                                 width: 12rem;
@@ -984,7 +954,7 @@ html {
                         width: 100%;
                         margin: 0 auto;
                         padding: 0 4rem;
-
+                        margin-bottom: 7rem;
                         .left {
                             width: 100%;
                             margin-bottom: 7rem;
@@ -1071,12 +1041,6 @@ html {
                                 }
                             }
                         }
-                    }
-                }
-
-                .start-quiz {
-                    a {
-                        font-size: 1.4rem;
                     }
                 }
             }

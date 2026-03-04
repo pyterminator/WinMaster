@@ -165,12 +165,17 @@
 
         function nextQuestion(q_id){
             let questions = JSON.parse(localStorage.getItem("winmaster_qs"))
+            let currentIndex = questions.findIndex(q => q.id == q_id)
+            currentIndex++
             
             let foundNext = questions.some(q => {
-                if(q.id == q_id + 1){
-                    fillQuestion(q.id);
-                    return true;
+                if (questions[currentIndex]){
+                    if(q.id == questions[currentIndex].id){
+                        fillQuestion(q.id);
+                        return true;
+                    }
                 }
+                
             });
 
             if(!foundNext){ 
@@ -180,6 +185,8 @@
                 html_quiz.style.display = "none"
                 general_q.parentElement.style.display = "block"
                 localStorage.setItem("finished_my_ans", true)
+
+                general_q.innerHTML = ""
 
                 for (let index = 0; index < questions.length; index++) {
                     let options_html = ""
