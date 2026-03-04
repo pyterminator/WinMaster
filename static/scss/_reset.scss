@@ -9,8 +9,14 @@
     color: inherit;
     user-select: none;
     font-family: inherit;
+    -webkit-tap-highlight-color: transparent; /* Safari, Chrome, mobil */
+
 }
 
 .container{
     padding: 0 1rem;
+}
+
+a:focus, a:active {
+    outline: none;
 }
