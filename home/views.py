@@ -1,7 +1,46 @@
 import json
+import os 
+import requests
 from django.shortcuts import render, redirect
 from home.models import SocialMedia, RootColor, Sentence, Question, UserData, UserAnswer, Option
 from django.http import JsonResponse
+from django.conf import settings
+from dotenv import load_dotenv
+
+load_dotenv()
+
+def escape_md_v2(text):
+    escape_chars = r"_*[]()~`>#+-=|{}.!/"
+    for ch in escape_chars:
+        text = text.replace(ch, f"\\{ch}")
+    return text
+
+
+def send_telegram_message(text):
+    chat_ids = get_chat_ids()
+    KEY = os.getenv("TELEGRAM_BOT_TOKEN")
+    url = f"https://api.telegram.org/bot{KEY}/sendMessage"
+    
+    safe_text = escape_md_v2(text)
+
+    for chat_id in chat_ids:
+
+        data = {
+            "chat_id": chat_id,
+            "text": safe_text,
+            "parse_mode": "MarkdownV2"
+        }
+
+        requests.post(url, data=data)
+
+
+def get_chat_ids():
+    CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
+    CHAT_ID2 = os.getenv("TELEGRAM_CHAT_ID2")
+    chat_ids = [CHAT_ID, CHAT_ID2]
+    return chat_ids
+
+
 
 def index(request):
     success = request.session.pop("form_success", False)
@@ -56,10 +95,12 @@ def register(request):
         new_user_data.save()
         
         keys = user_answer.keys()
+        interests = ""
         for q_id in keys:
             opt_id = user_answer.get(q_id)
             question = Question.objects.filter(id=q_id).first()
             option = Option.objects.filter(id=opt_id).first()
+            interests += f"{question.title}: {option.text}\n"
             new_user_answer = UserAnswer(
                 question=question,
                 selected_option=option,
@@ -68,6 +109,9 @@ def register(request):
 
             new_user_answer.save()
         request.session["form_success"] = True
+        send_telegram_message(
+            f"Yeni qeydiyyat\nAd, Soyad: {new_user_data.fullname}\nTelefon: {new_user_data.phone}\n{interests}".strip()
+        )
         return redirect("homepage")
             
         
