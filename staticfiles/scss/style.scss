@@ -848,17 +848,19 @@ html {
                 right:0;
                 width: 100%;
                 min-height: 100vh;
+                overflow-x: hidden;
+                overflow-y: scroll;
                 background-color: var(--link);
                 color: var(--bg-color);
                 z-index: 1000;
-                padding: 10rem;
+                padding: 10rem 3rem;
                 font-size: 1.6rem;
                 line-height: 120%;
                 display: none;
                 i{
-                    position: absolute;
+                    position: fixed;
                     top: 1rem;
-                    right: 1rem;
+                    right: 2rem;
                     width: 3rem;
                     height: 3rem;
                     background-color: var(--bg-color);

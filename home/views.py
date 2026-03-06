@@ -17,9 +17,8 @@ def escape_md_v2(text):
 
 
 def send_telegram_message(text):
-    chat_ids = get_chat_ids()
-    print(chat_ids)
-    KEY = os.getenv("TELEGRAM_BOT_TOKEN")
+    chat_ids = [settings.TELEGRAM_CHAT_ID, settings.TELEGRAM_CHAT_ID2]
+    KEY = settings.TELEGRAM_BOT_TOKEN
     url = f"https://api.telegram.org/bot{KEY}/sendMessage"
     
     safe_text = escape_md_v2(text)
