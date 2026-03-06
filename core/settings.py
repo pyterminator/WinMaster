@@ -28,6 +28,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home.apps.HomeConfig',
     "colorfield",
+    # 'ckeditor',
+    "django_ckeditor_5",
 ]
 
 MIDDLEWARE = [
@@ -119,3 +121,21 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+CKEDITOR_5_CONFIGS = {
+    "default": {
+        "toolbar": [
+            "heading", "|",
+            "bold", "italic",
+            "link",
+            "bulletedList", "numberedList"
+        ],
+    },
+
+    "custom": {
+        "extends": "default",
+        "toolbar": [
+            "bold",
+            "italic",
+        ],
+    },
+}

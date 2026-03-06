@@ -25,7 +25,10 @@
 {% endblock %}
 
 {% block root %}
-
+    <div class="mexfilik-page">
+        <i class="fa-solid fa-xmark"></i>
+        {{mexfilik.text|safe}}
+    </div>
     <div class="register">
         <form method="post">
             {% csrf_token %}
@@ -52,7 +55,7 @@
                         <span>
                             <i class="fa-solid fa-check"></i>
                         </span>
-                        <a href="#">
+                        <a href="#" class="openMexfilik">
                             Məxfilik siyasəti
                         </a>
                         ilə razıyam
@@ -77,6 +80,15 @@
 
 {% block scripts %}
     <script>
+        let closeMexfilik = document.querySelector(".mexfilik-page > i.fa-xmark")
+        closeMexfilik.addEventListener("click", function(e){
+            closeMexfilik.parentElement.style.display = "none"
+        })
+        let openMexfilik = document.querySelector("a.openMexfilik")
+        openMexfilik.addEventListener("click", function(e){
+            closeMexfilik.parentElement.style.display = "block"
+        })
+
         let reset_form = document.getElementById("reset-form")
         reset_form.addEventListener("click", function(e){
             e.preventDefault()

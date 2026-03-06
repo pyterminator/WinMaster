@@ -2,7 +2,7 @@ import json
 import os 
 import requests
 from django.shortcuts import render, redirect
-from home.models import SocialMedia, RootColor, Sentence, Question, UserData, UserAnswer, Option
+from home.models import SocialMedia, RootColor, Sentence, Question, UserData, UserAnswer, Option, Mexfilik
 from django.http import JsonResponse
 from django.conf import settings
 from dotenv import load_dotenv
@@ -18,20 +18,22 @@ def escape_md_v2(text):
 
 def send_telegram_message(text):
     chat_ids = get_chat_ids()
+    print(chat_ids)
     KEY = os.getenv("TELEGRAM_BOT_TOKEN")
     url = f"https://api.telegram.org/bot{KEY}/sendMessage"
     
     safe_text = escape_md_v2(text)
 
     for chat_id in chat_ids:
-
+        if not chat_id:
+            continue
         data = {
             "chat_id": chat_id,
             "text": safe_text,
-            "parse_mode": "MarkdownV2"
+            "parse_mode": "MarkdownV2",
+            "timeout":10
         }
-
-        requests.post(url, data=data)
+        requests.post(url, json=data)
 
 
 def get_chat_ids():
@@ -80,6 +82,7 @@ def get_quiz(request):
 def register(request):
     colors = RootColor.objects.all()
     invalid = request.session.pop("form_invalid", False)
+    mexf = Mexfilik.objects.last()
     if request.method == "POST":
         fullname = request.POST.get("fullname") 
         phone = request.POST.get("phone")
@@ -118,6 +121,7 @@ def register(request):
 
     data={
         "colors": colors,
-        "invalid":invalid
+        "invalid":invalid,
+        "mexfilik":mexf
     }
     return render(request, "pages/register.html", context=data)

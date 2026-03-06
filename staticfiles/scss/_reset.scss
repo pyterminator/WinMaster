@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+    color: inherit;
+    user-select: none;
+    font-family: inherit;
+    -webkit-tap-highlight-color: transparent; /* Safari, Chrome, mobil */
+
+}
+
+.container{
+    padding: 0 1rem;
+}
+
+a:focus, a:active {
+    outline: none;
+}
